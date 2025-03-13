@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Infinite Ammo"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version:
+  Date   : 2025-03-11
+  Author : SvT    - NOT MY SCRIPT BIG SHOUTOUT TO SvT
+
+  This script enables infinite ammo for all weapons, including laser rifles.
+
+
+}
+
+[ENABLE]
+
+aobscanmodule(ammo1,Enter the Gungeon.dll,41 89 86 70 01 00 00 41)
+alloc(newmem1,$1000,"Enter the Gungeon.dll"+25F82C3)
+aobscanmodule(charge3,Enter the Gungeon.dll,89 86 70 01 00 00 41 83)
+alloc(newmem3,$1000,"Enter the Gungeon.dll"+26414DC)
+
+label(code1)
+label(return1)
+label(code3)
+label(return3)
+
+
+newmem1:
+
+code1:
+  mov [r14+00000170],eax
+  jmp return1
+
+ammo1:
+  db 90 90 90 90 90 90 90
+return1:
+registersymbol(ammo1)
+
+newmem3:
+
+code3:
+  mov [rsi+00000170],eax
+  jmp return3
+
+charge3:
+  db 90 90 90 90 90 90
+return3:
+registersymbol(charge3)
+
+[DISABLE]
+ammo1:
+  db 41 89 86 70 01 00 00
+
+unregistersymbol(ammo1)
+dealloc(newmem1)
+
+charge3:
+  db 89 86 70 01 00 00
+
+unregistersymbol(charge3)
+dealloc(newmem3)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+25F82C3
+
+Enter the Gungeon.dll+25F828E: 48 8D 15 23 83 A3 FD  - lea rdx,["Enter the Gungeon.dll"+305B8]
+Enter the Gungeon.dll+25F8295: FF 15 E5 45 42 FF     - call qword ptr ["Enter the Gungeon.dll"+1A1C880]
+Enter the Gungeon.dll+25F829B: 48 8B 88 E8 01 00 00  - mov rcx,[rax+000001E8]
+Enter the Gungeon.dll+25F82A2: 8B 51 14              - mov edx,[rcx+14]
+Enter the Gungeon.dll+25F82A5: 41 2B 96 1C 03 00 00  - sub edx,[r14+0000031C]
+Enter the Gungeon.dll+25F82AC: E8 7F 01 00 00        - call "Enter the Gungeon.dll"+25F8430
+Enter the Gungeon.dll+25F82B1: 41 8B 96 70 01 00 00  - mov edx,[r14+00000170]
+Enter the Gungeon.dll+25F82B8: 41 2B D5              - sub edx,r13d
+Enter the Gungeon.dll+25F82BB: 33 C9                 - xor ecx,ecx
+Enter the Gungeon.dll+25F82BD: FF 15 5D CB 41 FF     - call qword ptr ["Enter the Gungeon.dll"+1A14E20]
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+25F82C3: 41 89 86 70 01 00 00  - mov [r14+00000170],eax
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+25F82CA: 41 8B D5              - mov edx,r13d
+Enter the Gungeon.dll+25F82CD: 49 8B CE              - mov rcx,r14
+Enter the Gungeon.dll+25F82D0: E8 4B 00 00 00        - call "Enter the Gungeon.dll"+25F8320
+Enter the Gungeon.dll+25F82D5: 90                    - nop 
+Enter the Gungeon.dll+25F82D6: 48 83 C4 30           - add rsp,30
+Enter the Gungeon.dll+25F82DA: 41 5F                 - pop r15
+Enter the Gungeon.dll+25F82DC: 41 5E                 - pop r14
+Enter the Gungeon.dll+25F82DE: 41 5D                 - pop r13
+Enter the Gungeon.dll+25F82E0: 41 5C                 - pop r12
+Enter the Gungeon.dll+25F82E2: 5F                    - pop rdi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"No Reload"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version:
+  Date   : 2025-03-11
+  Author : SvT    - NOT MY SCRIPT BIG SHOUTOUT TO SvT
+
+  This script enables no reload.
+
+
+}
+
+[ENABLE]
+
+aobscanmodule(noreload,Enter the Gungeon.dll,FF 41 0C 49 8B B4 24 70 05 00 00)
+alloc(newmem,$1000,"Enter the Gungeon.dll"+25FBC31)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  inc [rcx+0C]
+  mov rsi,[r12+00000570]
+  jmp return
+
+noreload:
+  db 90 90 90
+return:
+registersymbol(noreload)
+
+[DISABLE]
+noreload:
+  db FF 41 0C 49 8B B4 24 70 05 00 00
+
+unregistersymbol(noreload)
+dealloc(newmem)
+
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+25F82C3
+
+Enter the Gungeon.dll+25F828E: 48 8D 15 23 83 A3 FD  - lea rdx,["Enter the Gungeon.dll"+305B8]
+Enter the Gungeon.dll+25F8295: FF 15 E5 45 42 FF     - call qword ptr ["Enter the Gungeon.dll"+1A1C880]
+Enter the Gungeon.dll+25F829B: 48 8B 88 E8 01 00 00  - mov rcx,[rax+000001E8]
+Enter the Gungeon.dll+25F82A2: 8B 51 14              - mov edx,[rcx+14]
+Enter the Gungeon.dll+25F82A5: 41 2B 96 1C 03 00 00  - sub edx,[r14+0000031C]
+Enter the Gungeon.dll+25F82AC: E8 7F 01 00 00        - call "Enter the Gungeon.dll"+25F8430
+Enter the Gungeon.dll+25F82B1: 41 8B 96 70 01 00 00  - mov edx,[r14+00000170]
+Enter the Gungeon.dll+25F82B8: 41 2B D5              - sub edx,r13d
+Enter the Gungeon.dll+25F82BB: 33 C9                 - xor ecx,ecx
+Enter the Gungeon.dll+25F82BD: FF 15 5D CB 41 FF     - call qword ptr ["Enter the Gungeon.dll"+1A14E20]
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+25F82C3: 41 89 86 70 01 00 00  - mov [r14+00000170],eax
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+25F82CA: 41 8B D5              - mov edx,r13d
+Enter the Gungeon.dll+25F82CD: 49 8B CE              - mov rcx,r14
+Enter the Gungeon.dll+25F82D0: E8 4B 00 00 00        - call "Enter the Gungeon.dll"+25F8320
+Enter the Gungeon.dll+25F82D5: 90                    - nop 
+Enter the Gungeon.dll+25F82D6: 48 83 C4 30           - add rsp,30
+Enter the Gungeon.dll+25F82DA: 41 5F                 - pop r15
+Enter the Gungeon.dll+25F82DC: 41 5E                 - pop r14
+Enter the Gungeon.dll+25F82DE: 41 5D                 - pop r13
+Enter the Gungeon.dll+25F82E0: 41 5C                 - pop r12
+Enter the Gungeon.dll+25F82E2: 5F                    - pop rdi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Infinite Money (Shells? Bullets? Whatever they're called)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version: 
+  Date   : 2025-03-11
+  Author : PC
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Money,Enter the Gungeon.dll,89 7E 14 48 8D 05 09 32 43 FF) // should be unique
+alloc(moneyMem,$1000,Money)
+
+label(code)
+label(return)
+
+moneyMem:
+
+code:
+  push edx
+  mov edx, #99999
+  mov [rsi+14],edx
+  pop edx
+  lea rax,["Enter the Gungeon.dll"+1A2B710]
+  jmp return
+
+Money:
+  jmp moneyMem
+  nop 5
+return:
+registersymbol(Money)
+
+[DISABLE]
+
+Money:
+  db 89 7E 14 48 8D 05 09 32 43 FF
+
+unregistersymbol(Money)
+dealloc(moneyMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+25F84FD
+
+Enter the Gungeon.dll+25F84D6: 48 8B 58 18           - mov rbx,[rax+18]
+Enter the Gungeon.dll+25F84DA: 80 3B 00              - cmp byte ptr [rbx],00
+Enter the Gungeon.dll+25F84DD: BA 2D 00 00 00        - mov edx,0000002D
+Enter the Gungeon.dll+25F84E2: E8 C9 DF FD FF        - call "Enter the Gungeon.dll"+25D64B0
+Enter the Gungeon.dll+25F84E7: 45 33 C0              - xor r8d,r8d
+Enter the Gungeon.dll+25F84EA: 41 8D 50 2D           - lea edx,[r8+2D]
+Enter the Gungeon.dll+25F84EE: 48 8B CB              - mov rcx,rbx
+Enter the Gungeon.dll+25F84F1: 48 8B 01              - mov rax,[rcx]
+Enter the Gungeon.dll+25F84F4: 48 FF 50 50           - call qword ptr [rax+50]
+Enter the Gungeon.dll+25F84F8: F3 41 0F 11 36        - movss [r14],xmm6
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+25F84FD: 89 7E 14              - mov [rsi+14],edi
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+25F8500: 48 8D 05 09 32 43 FF  - lea rax,["Enter the Gungeon.dll"+1A2B710]
+Enter the Gungeon.dll+25F8507: 48 8B 08              - mov rcx,[rax]
+Enter the Gungeon.dll+25F850A: 48 85 C9              - test rcx,rcx
+Enter the Gungeon.dll+25F850D: 0F 94 C0              - sete al
+Enter the Gungeon.dll+25F8510: A8 01                 - test al,01
+Enter the Gungeon.dll+25F8512: 75 28                 - jne "Enter the Gungeon.dll"+25F853C
+Enter the Gungeon.dll+25F8514: 48 8B 05 85 1B 42 FF  - mov rax,["Enter the Gungeon.dll"+1A1A0A0]
+Enter the Gungeon.dll+25F851B: 48 8B 49 08           - mov rcx,[rcx+08]
+Enter the Gungeon.dll+25F851F: 48 39 08              - cmp [rax],rcx
+Enter the Gungeon.dll+25F8522: 0F 94 C0              - sete al
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Infinite Keys"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version: 
+  Date   : 2025-03-12
+  Author : PC
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Keys,Enter the Gungeon.dll,89 51 18 48 8D 05 EF C4 39 FF) // should be unique
+alloc(keysMem,$1000,Keys)
+
+label(code)
+label(return)
+
+keysMem:
+
+code:
+  push eax
+  mov eax,#999
+  mov [rcx+18],eax
+  pop eax
+  lea rax,["Enter the Gungeon.dll"+1A2B548]
+  jmp return
+
+Keys:
+  jmp keysMem
+  nop 5
+return:
+registersymbol(Keys)
+
+[DISABLE]
+
+Keys:
+  db 89 51 18 48 8D 05 EF C4 39 FF
+
+unregistersymbol(Keys)
+dealloc(keysMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+268F04F
+
+Enter the Gungeon.dll+268F03B: CC                    - int 3 
+Enter the Gungeon.dll+268F03C: CC                    - int 3 
+Enter the Gungeon.dll+268F03D: CC                    - int 3 
+Enter the Gungeon.dll+268F03E: CC                    - int 3 
+Enter the Gungeon.dll+268F03F: CC                    - int 3 
+Enter the Gungeon.dll+268F040: 53                    - push rbx
+Enter the Gungeon.dll+268F041: 57                    - push rdi
+Enter the Gungeon.dll+268F042: 48 83 EC 38           - sub rsp,38
+Enter the Gungeon.dll+268F046: 66 0F 7F 74 24 20     - movdqa [rsp+20],xmm6
+Enter the Gungeon.dll+268F04C: 48 8B D9              - mov rbx,rcx
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+268F04F: 89 51 18              - mov [rcx+18],edx
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+268F052: 48 8D 05 EF C4 39 FF  - lea rax,["Enter the Gungeon.dll"+1A2B548]
+Enter the Gungeon.dll+268F059: 48 8B F8              - mov rdi,rax
+Enter the Gungeon.dll+268F05C: 48 83 38 00           - cmp qword ptr [rax],00
+Enter the Gungeon.dll+268F060: 75 2D                 - jne "Enter the Gungeon.dll"+268F08F
+Enter the Gungeon.dll+268F062: 48 8D 15 1F 07 3B FF  - lea rdx,["Enter the Gungeon.dll"+1A3F788]
+Enter the Gungeon.dll+268F069: FF 15 49 D7 38 FF     - call qword ptr ["Enter the Gungeon.dll"+1A1C7B8]
+Enter the Gungeon.dll+268F06F: 48 8D 05 BA 0D 3A FF  - lea rax,["Enter the Gungeon.dll"+1A2FE30]
+Enter the Gungeon.dll+268F076: 48 8B 08              - mov rcx,[rax]
+Enter the Gungeon.dll+268F079: 80 39 00              - cmp byte ptr [rcx],00
+Enter the Gungeon.dll+268F07C: 4C 8D 05 ED D4 3E FF  - lea r8,["Enter the Gungeon.dll"+1A7C570]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"Health Stuffs"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version:
+  Date   : 2025-03-13
+  Author : JustHim24
+  This script sets up some stuffs for OHK and Godmode
+}
+[ENABLE]
+aobscanmodule(HEALTH_HOOK,Enter the Gungeon.dll,F3 0F 11 76 68 44 38 B6) // Unique
+alloc(healthHookMem,$1000,Enter the Gungeon.dll)
+label(return)
+label(ohk)
+label(godmode)
+label(originalcode)
+label(playerHealth)
+label(enemyHealth)
+define(ohkMem,healthHookMem+7A)
+define(godModeMem,ohkMem+1)
+registersymbol(HEALTH_HOOK)
+registersymbol(healthHookMem)
+registersymbol(ohkMem)
+registersymbol(godModeMem)
+healthHookMem:
+  cmp [rsi+54], (float)1.400   // Check if player - Credit to SvT on FearLess Revolution
+  je playerHealth
+  jmp enemyHealth
+
+playerHealth:
+  cmp byte [godModeMem], 1     // Check if God Mode is enabled
+  je godmode
+  jmp originalcode
+
+enemyHealth:
+  cmp byte [ohkMem], 1         // Check if OHK is enabled
+  je ohk
+  jmp originalcode
+
+ohk:
+  mov dword [rsi+68], 0
+  jmp return
+
+godmode:
+  mov dword [rsi+68], 0x447A0000
+  jmp return
+
+originalcode:
+  movss [rsi+68], xmm6
+  jmp return
+
+HEALTH_HOOK:
+  jmp healthHookMem
+
+return:
+[DISABLE]
+HEALTH_HOOK:
+  db F3 0F 11 76 68
+unregistersymbol(HEALTH_HOOK)
+unregistersymbol(healthHookMem)
+unregistersymbol(ohkMem)
+unregistersymbol(godModeMem)
+dealloc(healthHookMem)
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+25850D7
+Enter the Gungeon.dll+25850AF: 48 8B D3                 - mov rdx,rbx
+Enter the Gungeon.dll+25850B2: 48 8B CF                 - mov rcx,rdi
+Enter the Gungeon.dll+25850B5: E8 76 F0 CD FF           - call "Enter the Gungeon.dll"+2264130
+Enter the Gungeon.dll+25850BA: 41 FF C7                 - inc r15d
+Enter the Gungeon.dll+25850BD: 41 8B 4D 10              - mov ecx,[r13+10]
+Enter the Gungeon.dll+25850C1: 44 3B F9                 - cmp r15d,ecx
+Enter the Gungeon.dll+25850C4: 7C AE                    - jl "Enter the Gungeon.dll"+2585074
+Enter the Gungeon.dll+25850C6: 4C 8B AC 24 78 01 00 00  - mov r13,[rsp+00000178]
+Enter the Gungeon.dll+25850CE: F3 0F 10 76 68           - movss xmm6,[rsi+68]
+Enter the Gungeon.dll+25850D3: F3 0F 5C F7              - subss xmm6,xmm7
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+25850D7: F3 0F 11 76 68           - movss [rsi+68],xmm6
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+25850DC: 44 38 B6 28 01 00 00     - cmp [rsi+00000128],r14b
+Enter the Gungeon.dll+25850E3: 74 69                    - je "Enter the Gungeon.dll"+258514E
+Enter the Gungeon.dll+25850E5: 48 8B 0D 3C 51 49 FF     - mov rcx,["Enter the Gungeon.dll"+1A1A228]
+Enter the Gungeon.dll+25850EC: FF 15 A6 76 49 FF        - call qword ptr ["Enter the Gungeon.dll"+1A1C798]
+Enter the Gungeon.dll+25850F2: 48 8B D8                 - mov rbx,rax
+Enter the Gungeon.dll+25850F5: F3 0F 11 70 08           - movss [rax+08],xmm6
+Enter the Gungeon.dll+25850FA: 48 8B 0D 27 51 49 FF     - mov rcx,["Enter the Gungeon.dll"+1A1A228]
+Enter the Gungeon.dll+2585101: FF 15 91 76 49 FF        - call qword ptr ["Enter the Gungeon.dll"+1A1C798]
+Enter the Gungeon.dll+2585107: F3 0F 11 78 08           - movss [rax+08],xmm7
+Enter the Gungeon.dll+258510C: 48 8D 15 D5 59 4F FF     - lea rdx,["Enter the Gungeon.dll"+1A7AAE8]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"Enable OHK"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version: 2025-03-12
+  Author : PC
+
+  This script enables One Hit Kill (OHK) for enemies only.
+}
+
+[ENABLE]
+ohkMem:
+  db 1
+[DISABLE]
+ohkMem:
+  db 0
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"Enable God Mode"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version: 2025-03-12
+  Author : PC
+
+  This script enables God Mode.
+}
+
+[ENABLE]
+godModeMem:
+  db 1
+[DISABLE]
+godModeMem:
+  db 0
+
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"Infinite Blanks"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version: 
+  Date   : 2025-03-13
+  Author : PC
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Blanks,Enter the Gungeon.dll,89 91 08 02 00 00) // should be unique
+alloc(newmem,$1000,Blanks)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov edx, 9
+  mov [rcx+00000208],edx
+  jmp return
+
+Blanks:
+  jmp newmem
+  nop
+return:
+registersymbol(Blanks)
+
+[DISABLE]
+
+Blanks:
+  db 89 91 08 02 00 00
+
+unregistersymbol(Blanks)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+263573F
+
+Enter the Gungeon.dll+263572B: CC                    - int 3 
+Enter the Gungeon.dll+263572C: CC                    - int 3 
+Enter the Gungeon.dll+263572D: CC                    - int 3 
+Enter the Gungeon.dll+263572E: CC                    - int 3 
+Enter the Gungeon.dll+263572F: CC                    - int 3 
+Enter the Gungeon.dll+2635730: 53                    - push rbx
+Enter the Gungeon.dll+2635731: 57                    - push rdi
+Enter the Gungeon.dll+2635732: 48 83 EC 38           - sub rsp,38
+Enter the Gungeon.dll+2635736: 66 0F 7F 74 24 20     - movdqa [rsp+20],xmm6
+Enter the Gungeon.dll+263573C: 48 8B D9              - mov rbx,rcx
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+263573F: 89 91 08 02 00 00     - mov [rcx+00000208],edx
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+2635745: 48 8D 05 FC 5D 3F FF  - lea rax,["Enter the Gungeon.dll"+1A2B548]
+Enter the Gungeon.dll+263574C: 48 8B F8              - mov rdi,rax
+Enter the Gungeon.dll+263574F: 48 83 38 00           - cmp qword ptr [rax],00
+Enter the Gungeon.dll+2635753: 75 2D                 - jne "Enter the Gungeon.dll"+2635782
+Enter the Gungeon.dll+2635755: 48 8D 15 2C A0 40 FF  - lea rdx,["Enter the Gungeon.dll"+1A3F788]
+Enter the Gungeon.dll+263575C: FF 15 56 70 3E FF     - call qword ptr ["Enter the Gungeon.dll"+1A1C7B8]
+Enter the Gungeon.dll+2635762: 48 8D 05 C7 A6 3F FF  - lea rax,["Enter the Gungeon.dll"+1A2FE30]
+Enter the Gungeon.dll+2635769: 48 8B 08              - mov rcx,[rax]
+Enter the Gungeon.dll+263576C: 80 39 00              - cmp byte ptr [rcx],00
+Enter the Gungeon.dll+263576F: 4C 8D 05 FA 6D 44 FF  - lea r8,["Enter the Gungeon.dll"+1A7C570]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"Infinite Hedgemony"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enter the Gungeon.exe
+  Version: 
+  Date   : 2025-03-13
+  Author : PC
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+define(INJECT,"Enter the Gungeon.dll"+25D762C)
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  push rbx
+  mov rbx,(float)999
+  movd xmm6, rbx
+  pop rbx
+  movss [rcx+rax*8+1C],xmm6
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db F3 0F 11 74 C1 1C
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: Enter the Gungeon.dll+25D762C
+
+Enter the Gungeon.dll+25D7607: 8D 41 FF           - lea eax,[rcx-01]
+Enter the Gungeon.dll+25D760A: 89 43 24           - mov [rbx+24],eax
+Enter the Gungeon.dll+25D760D: EB 7A              - jmp "Enter the Gungeon.dll"+25D7689
+Enter the Gungeon.dll+25D760F: 45 84 ED           - test r13b,r13b
+Enter the Gungeon.dll+25D7612: 0F 85 B7 00 00 00  - jne "Enter the Gungeon.dll"+25D76CF
+Enter the Gungeon.dll+25D7618: 48 8B 4B 10        - mov rcx,[rbx+10]
+Enter the Gungeon.dll+25D761C: 48 63 C6           - movsxd  rax,esi
+Enter the Gungeon.dll+25D761F: 48 3B 41 08        - cmp rax,[rcx+08]
+Enter the Gungeon.dll+25D7623: 0F 83 BB 00 00 00  - jae "Enter the Gungeon.dll"+25D76E4
+Enter the Gungeon.dll+25D7629: 48 03 C0           - add rax,rax
+// ---------- INJECTING HERE ----------
+Enter the Gungeon.dll+25D762C: F3 0F 11 74 C1 1C  - movss [rcx+rax*8+1C],xmm6
+// ---------- DONE INJECTING  ----------
+Enter the Gungeon.dll+25D7632: FF 43 1C           - inc [rbx+1C]
+Enter the Gungeon.dll+25D7635: 66 0F 6F 74 24 20  - movdqa xmm6,[rsp+20]
+Enter the Gungeon.dll+25D763B: 48 83 C4 30        - add rsp,30
+Enter the Gungeon.dll+25D763F: 41 5F              - pop r15
+Enter the Gungeon.dll+25D7641: 41 5E              - pop r14
+Enter the Gungeon.dll+25D7643: 41 5D              - pop r13
+Enter the Gungeon.dll+25D7645: 41 5C              - pop r12
+Enter the Gungeon.dll+25D7647: 5F                 - pop rdi
+Enter the Gungeon.dll+25D7648: 5E                 - pop rsi
+Enter the Gungeon.dll+25D7649: 5B                 - pop rbx
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of mov [r14+00000170],eax</Description>
+      <AddressString>Enter the Gungeon.dll+25F82C3</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>5D</Byte>
+        <Byte>CB</Byte>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>89</Byte>
+        <Byte>86</Byte>
+        <Byte>70</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>8B</Byte>
+        <Byte>D5</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rsi+14],edi</Description>
+      <AddressString>Enter the Gungeon.dll+25F84FD</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>36</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>7E</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>05</Byte>
+        <Byte>09</Byte>
+        <Byte>32</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rax+r8*4+10],r9d</Description>
+      <AddressString>SharedLibrary.dll+504A79</AddressString>
+      <Before>
+        <Byte>3B</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+        <Byte>73</Byte>
+        <Byte>1B</Byte>
+      </Before>
+      <Actual>
+        <Byte>46</Byte>
+        <Byte>89</Byte>
+        <Byte>4C</Byte>
+        <Byte>80</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>41</Byte>
+        <Byte>14</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movsxd  rcx,dword ptr [rcx+24]</Description>
+      <AddressString>Enter the Gungeon.dll+291CDBF</AddressString>
+      <Before>
+        <Byte>F8</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>58</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>49</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>3B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+        <Byte>73</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movsxd  rcx,dword ptr [rcx+24]</Description>
+      <AddressString>Enter the Gungeon.dll+291D21F</AddressString>
+      <Before>
+        <Byte>F8</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>58</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>49</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>3B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+        <Byte>73</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movsxd  rcx,dword ptr [rcx+24]</Description>
+      <AddressString>Enter the Gungeon.dll+291F44D</AddressString>
+      <Before>
+        <Byte>F8</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>58</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>49</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>3B</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+        <Byte>73</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movsxd  rcx,dword ptr [rcx+24]</Description>
+      <AddressString>UnityPlayer.dll+4F901D</AddressString>
+      <Before>
+        <Byte>79</Byte>
+        <Byte>18</Byte>
+        <Byte>00</Byte>
+        <Byte>7C</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>49</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>28</Byte>
+        <Byte>F0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movsxd  rcx,dword ptr [rcx+24]</Description>
+      <AddressString>UnityPlayer.dll+665B9C</AddressString>
+      <Before>
+        <Byte>79</Byte>
+        <Byte>18</Byte>
+        <Byte>00</Byte>
+        <Byte>7C</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>49</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>28</Byte>
+        <Byte>F0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+18],edx</Description>
+      <AddressString>Enter the Gungeon.dll+268F04F</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>51</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>05</Byte>
+        <Byte>EF</Byte>
+        <Byte>C4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rsi+68],xmm6</Description>
+      <AddressString>Enter the Gungeon.dll+25850D7</AddressString>
+      <Before>
+        <Byte>68</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>F7</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>76</Byte>
+        <Byte>68</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>38</Byte>
+        <Byte>B6</Byte>
+        <Byte>28</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+00000208],edx</Description>
+      <AddressString>Enter the Gungeon.dll+263573F</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>91</Byte>
+        <Byte>08</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>05</Byte>
+        <Byte>FC</Byte>
+        <Byte>5D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rcx+rax*8+1C],xmm6</Description>
+      <AddressString>Enter the Gungeon.dll+25D762C</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>03</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>74</Byte>
+        <Byte>C1</Byte>
+        <Byte>1C</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>43</Byte>
+        <Byte>1C</Byte>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rcx+rax*8+1C],xmm6</Description>
+      <AddressString>Enter the Gungeon.dll+25EE54C</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>03</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>74</Byte>
+        <Byte>C1</Byte>
+        <Byte>1C</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>43</Byte>
+        <Byte>1C</Byte>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>7FFBD39E84FD</Address>
+      <Comment>Opcode for money stuffs
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Enter the Gungeon.dll"+25D762C</Address>
+      <Comment>HEDGEMONY
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Enter the Gungeon.dll"+25F82C3</Address>
+      <Comment>Opcode for removing 1 from ammo
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Enter the Gungeon.dll"+263573F</Address>
+      <Comment>Subtract blanks
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Enter the Gungeon.dll"+2635745</Address>
+      <Comment>This actually activates the blanks
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Enter the Gungeon.dll"+26414DC</Address>
+      <Comment>Laser Ammo
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Enter the Gungeon.dll"+268F04F</Address>
+      <Comment>Keys
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
